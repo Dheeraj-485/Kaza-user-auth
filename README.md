@@ -24,7 +24,7 @@ Kaza User Authentication is a robust authentication system built using **Node.js
 ### 1. Clone the repository
 ```bash
 git clone 
-cd kaza-auth
+cd server
 ```
 
 ### 2. Install dependencies
@@ -43,7 +43,7 @@ JWT_SECRET=your_secret_key
 ### 4. Set up PostgreSQL Database
 Ensure you have a running PostgreSQL instance and update the `DATABASE_URL` in the `.env` file. Then, create the users table by running:
 ```bash
-node index.js
+node server.js
 ```
 
 ### 5. Start the Server
