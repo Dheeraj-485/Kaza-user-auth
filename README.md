@@ -23,7 +23,7 @@ Kaza User Authentication is a robust authentication system built using **Node.js
 
 ### 1. Clone the repository
 ```bash
-git clone 
+git clone https://github.com/Dheeraj-485/Kaza-user-auth.git
 cd server
 ```
 
