@@ -1,144 +1,120 @@
-# Kaza-user-auth
-Tech stack used:- Nodejs,Expressjs,PostgreSQL
+# Kaza User Authentication
 
+## Overview
+Kaza User Authentication is a robust authentication system built using **Node.js**, **Express**, **PostgreSQL**, and **JWT authentication**. It includes user registration, login, and profile management with secure password hashing and token-based authentication.
 
+## Features
+- User Signup with validation
+- User Login with JWT-based authentication
+- Profile update (email/password update only)
+- Secure password hashing using bcrypt
+- Token verification middleware
 
-Here’s a ready-to-use README.md file for your Kaza User Auth API project, perfect for GitHub:
+## Technologies Used
+- **Node.js**
+- **Express.js**
+- **PostgreSQL**
+- **JWT (JSON Web Token)**
+- **Bcrypt**
+- **Joi (Input validation)**
+- **Dotenv** for environment variables
 
-markdown
-Copy
-Edit
-# 🔐 Kaza User Auth API
+## Installation
 
-A simple Node.js + Express.js authentication API using PostgreSQL for user signup, login, and profile update.
+### 1. Clone the repository
+```bash
+git clone 
+cd kaza-auth
+```
 
-## 🚀 Tech Stack
+### 2. Install dependencies
+```bash
+npm install
+```
 
-- **Backend**: Node.js, Express.js
-- **Database**: PostgreSQL
-- **Auth & Security**: bcrypt, JWT
-- **Environment Config**: dotenv
+### 3. Set up environment variables
+Create a `.env` file in the root directory and configure it with the following:
+```env
+PORT=3000
+DATABASE_URL=your_postgresql_connection_string
+JWT_SECRET=your_secret_key
+```
 
----
+### 4. Set up PostgreSQL Database
+Ensure you have a running PostgreSQL instance and update the `DATABASE_URL` in the `.env` file. Then, create the users table by running:
+```bash
+node index.js
+```
 
-## 📂 Project Structure
+### 5. Start the Server
+```bash
+npm start
+```
+The server will start on `http://localhost:3000` (or the port specified in your `.env` file).
 
-kaza-user-auth/ ├── controllers/ │ └── userController.js ├── db/ │ └── index.js ├── middlewares/ │ └── authMiddleware.js ├── routes/ │ └── userRoutes.js ├── .env ├── server.js └── README.md
+## API Endpoints
 
-yaml
-Copy
-Edit
-
----
-
-## 🧪 API Features
-
-### 1. Signup
-- **POST** `/api/signup`
-- Request body:
-  ```json
-  {
-    "username": "yourname",
-    "email": "your@email.com",
-    "password": "yourPassword"
-  }
-2. Login
-POST /api/login
-
-Use either username or email:
-
-json
-Copy
-Edit
+### 1. User Signup
+**Endpoint:** `POST https://kaza-user-auth.onrender.com/api/auth/signup`
+**Request Body:**
+```json
 {
-  "username": "yourname",
-  "password": "yourPassword"
+  "username": "testuser",
+  "email": "test@example.com",
+  "password": "password123"
 }
-3. Profile Update
-PUT /api/profile
+```
+**Response:**
+```json
+{
+  "message": "User registered successfully."
+}
+```
 
-Requires Bearer Token in Authorization header.
+### 2. User Login
+**Endpoint:** `POST https://kaza-user-auth.onrender.com/api/auth/login`
+**Request Body:**
+```json
+{
+  "usernameOrEmail": "testuser",
+  "password": "password123"
+}
+```
+**Response:**
+```json
+{
+  "message": "Login successful.",
+  "token": "your_jwt_token"
+}
+```
 
-Payload:
-
-json
-Copy
-Edit
+### 3. Update Profile (Authenticated)
+**Endpoint:** `PUT https://kaza-user-auth.onrender.com/api/auth/profile`
+**Headers:** `Authorization: Bearer <JWT_TOKEN>`
+**Request Body:**
+```json
 {
   "email": "newemail@example.com",
-  "password": "newpassword"
+  "password": "newpassword123"
 }
-🛡️ Security Considerations
-Passwords hashed using bcrypt
+```
+**Response:**
+```json
+{
+  "message": "Profile updated successfully."
+}
+```
 
-JWT-based route protection
+## Middleware
+### `verifyToken`
+This middleware verifies JWT tokens for protected routes.
 
-Validations for duplicate usernames/emails
+## Running in Production
+- Use a process manager like `pm2` to keep the server running.
+- Ensure environment variables are properly configured.
+- Use a secure database connection.
 
-Proper HTTP status codes and error messages
-
-🛠️ Setup Instructions
-Clone the repository
-
-bash
-Copy
-Edit
-git clone https://github.com/your-username/kaza-user-auth.git
-cd kaza-user-auth
-Install dependencies
-
-bash
-Copy
-Edit
-npm install
-Create a PostgreSQL Database
-
-sql
-Copy
-Edit
-CREATE DATABASE user_auth_db;
-
-CREATE TABLE users (
-  id SERIAL PRIMARY KEY,
-  username VARCHAR(255) UNIQUE NOT NULL,
-  email VARCHAR(255) UNIQUE NOT NULL,
-  password TEXT NOT NULL
-);
-Set up your .env file
-
-ini
-Copy
-Edit
-PORT=3000
-DB_USER=your_pg_user
-DB_PASSWORD=your_pg_password
-DB_HOST=localhost
-DB_PORT=5432
-DB_DATABASE=user_auth_db
-JWT_SECRET=your_jwt_secret
-Start the server
-
-bash
-Copy
-Edit
-node server.js
-📫 Contact
-Have questions or suggestions? Reach out at your-email@example.com
-
-📄 License
-MIT License
-
-yaml
-Copy
-Edit
 
 ---
-
-Let me know if you’d like me to add testing instructions, Postman collection, or deployment steps (like Railway, Render, or Docker)!
-
-
-
-
-
-
+Developed by [Dheeraj] 
 
